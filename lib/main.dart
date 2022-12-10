@@ -6,6 +6,7 @@ import 'package:real_life_calculator/pages/main_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting();
+
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     themeMode: ThemeMode.light,
