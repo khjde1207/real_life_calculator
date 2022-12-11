@@ -16,10 +16,10 @@ extension GetSettingIsarCollection on Isar {
 const SettingIsarSchema = CollectionSchema(
   name: r'SettingIsar',
   schema:
-      r'{"name":"SettingIsar","idName":"id","properties":[],"indexes":[],"links":[]}',
+      r'{"name":"SettingIsar","idName":"id","properties":[{"name":"regPages","type":"LongList"}],"indexes":[],"links":[]}',
   idName: r'id',
-  propertyIds: {},
-  listProperties: {},
+  propertyIds: {r'regPages': 0},
+  listProperties: {r'regPages'},
   indexIds: {},
   indexValueTypes: {},
   linkIds: {},
@@ -60,13 +60,14 @@ void _settingIsarSerializeNative(
     int staticSize,
     List<int> offsets,
     AdapterAlloc alloc) {
-  final size = (staticSize) as int;
+  final size = (staticSize + (object.regPages.length) * 8) as int;
   cObj.buffer = alloc(size);
   cObj.buffer_length = size;
 
   final buffer = IsarNative.bufAsBytes(cObj.buffer, size);
   final writer = IsarBinaryWriter(buffer, staticSize);
   writer.writeHeader();
+  writer.writeLongList(offsets[0], object.regPages);
 }
 
 SettingIsar _settingIsarDeserializeNative(
@@ -76,6 +77,7 @@ SettingIsar _settingIsarDeserializeNative(
     List<int> offsets) {
   final object = SettingIsar();
   object.id = id;
+  object.regPages = reader.readLongList(offsets[0]) ?? [];
   return object;
 }
 
@@ -84,6 +86,8 @@ P _settingIsarDeserializePropNative<P>(
   switch (propertyIndex) {
     case -1:
       return id as P;
+    case 0:
+      return (reader.readLongList(offset) ?? []) as P;
     default:
       throw IsarError('Illegal propertyIndex');
   }
@@ -93,6 +97,7 @@ Object _settingIsarSerializeWeb(
     IsarCollection<SettingIsar> collection, SettingIsar object) {
   final jsObj = IsarNative.newJsObject();
   IsarNative.jsObjectSet(jsObj, r'id', object.id);
+  IsarNative.jsObjectSet(jsObj, r'regPages', object.regPages);
   return jsObj;
 }
 
@@ -101,6 +106,11 @@ SettingIsar _settingIsarDeserializeWeb(
   final object = SettingIsar();
   object.id =
       IsarNative.jsObjectGet(jsObj, r'id') ?? (double.negativeInfinity as int);
+  object.regPages = (IsarNative.jsObjectGet(jsObj, r'regPages') as List?)
+          ?.map((e) => e ?? (double.negativeInfinity as int))
+          .toList()
+          .cast<int>() ??
+      [];
   return object;
 }
 
@@ -109,6 +119,12 @@ P _settingIsarDeserializePropWeb<P>(Object jsObj, String propertyName) {
     case r'id':
       return (IsarNative.jsObjectGet(jsObj, r'id') ??
           (double.negativeInfinity as int)) as P;
+    case r'regPages':
+      return ((IsarNative.jsObjectGet(jsObj, r'regPages') as List?)
+              ?.map((e) => e ?? (double.negativeInfinity as int))
+              .toList()
+              .cast<int>() ??
+          []) as P;
     default:
       throw IsarError('Illegal propertyName');
   }
@@ -250,6 +266,62 @@ extension SettingIsarQueryFilter
       ));
     });
   }
+
+  QueryBuilder<SettingIsar, SettingIsar, QAfterFilterCondition>
+      regPagesElementEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'regPages',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingIsar, SettingIsar, QAfterFilterCondition>
+      regPagesElementGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'regPages',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingIsar, SettingIsar, QAfterFilterCondition>
+      regPagesElementLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'regPages',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingIsar, SettingIsar, QAfterFilterCondition>
+      regPagesElementBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'regPages',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
 }
 
 extension SettingIsarQueryLinks
@@ -274,13 +346,25 @@ extension SettingIsarQueryWhereSortThenBy
 }
 
 extension SettingIsarQueryWhereDistinct
-    on QueryBuilder<SettingIsar, SettingIsar, QDistinct> {}
+    on QueryBuilder<SettingIsar, SettingIsar, QDistinct> {
+  QueryBuilder<SettingIsar, SettingIsar, QDistinct> distinctByRegPages() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'regPages');
+    });
+  }
+}
 
 extension SettingIsarQueryProperty
     on QueryBuilder<SettingIsar, SettingIsar, QQueryProperty> {
   QueryBuilder<SettingIsar, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SettingIsar, List<int>, QQueryOperations> regPagesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'regPages');
     });
   }
 }
