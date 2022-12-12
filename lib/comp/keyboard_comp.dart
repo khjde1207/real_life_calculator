@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:real_life_calculator/model/isar_model.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:vibration/vibration.dart';
 
@@ -10,34 +11,74 @@ class KeyboardComp extends GetView {
   });
 
   Map<String, Function()> clcButtons1 = {
-    "C": () => "C",
-    "%": () => "%",
-    "( )": () => "()",
-    "÷": () => "÷",
+    "AC": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "C",
+    "%": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "%",
+    "( )": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "()",
+    "÷": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "÷",
   };
   Map<String, Function()> clcButtons2 = {
-    "7": () => "7",
-    "8": () => "8",
-    "9": () => "9",
-    "×": () => "×",
+    "7": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "7",
+    "8": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "8",
+    "9": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "9",
+    "×": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "×",
   };
   Map<String, Function()> clcButtons3 = {
-    "4": () => "4",
-    "5": () => "5",
-    "6": () => "6",
-    "-": () => "-",
+    "4": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "4",
+    "5": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "5",
+    "6": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "6",
+    "-": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "-",
   };
   Map<String, Function()> clcButtons4 = {
-    "1": () => "1",
-    "2": () => "2",
-    "3": () => "3",
-    "+": () => "+",
+    "1": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "1",
+    "2": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "2",
+    "3": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "3",
+    "+": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "+",
   };
   Map<String, Function()> clcButtons5 = {
-    "0": () => "0",
-    "00": () => "00",
-    ".": () => ".",
-    "=": () => "=",
+    "0": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "0",
+    "00": () => NumberTypeIsar()
+      ..type = 0
+      ..value = "00",
+    ".": () => NumberTypeIsar()
+      ..type = 0
+      ..value = ".",
+    "=": () => NumberTypeIsar()
+      ..type = 1
+      ..value = "=",
   };
 
   Map<String, Function> engineeringButton = {
@@ -56,7 +97,7 @@ class KeyboardComp extends GetView {
     "x-10^y": () {},
   };
 
-  Function(String) onPressed;
+  Function(NumberTypeIsar) onPressed;
 
   @override
   Widget build(BuildContext context) {

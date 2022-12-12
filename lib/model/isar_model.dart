@@ -8,3 +8,11 @@ class SettingIsar {
 
   List<int> regPages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 }
+
+// @Collection()
+class NumberTypeIsar {
+  // int id = Isar.autoIncrement;
+
+  int type = 0;
+  String value = "";
+}
