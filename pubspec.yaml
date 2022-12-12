@@ -50,6 +50,7 @@ dependencies:
   isar: 3.0.0-dev.5
   isar_flutter_libs: 3.0.0-dev.5
   styled_widget: ^0.4.1
+  vibration: ^1.7.6
 
 
 dev_dependencies:

@@ -12,7 +12,11 @@ class ClcPage extends GetView {
     return Scaffold(
       body: [
         Text("숫자 필드").expanded(),
-        KeyboardComp().expanded(),
+        KeyboardComp(
+          onPressed: (v) {
+            print(v);
+          },
+        ),
       ].toColumn(),
     );
   }
