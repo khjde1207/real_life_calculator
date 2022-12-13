@@ -13,7 +13,7 @@ class KeyboardComp extends GetView {
   Map<String, Function()> clcButtons1 = {
     "AC": () => NumberTypeIsar()
       ..type = 1
-      ..value = "C",
+      ..value = "AC",
     "%": () => NumberTypeIsar()
       ..type = 1
       ..value = "%",

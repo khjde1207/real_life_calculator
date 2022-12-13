@@ -16,16 +16,18 @@ class ClcPage extends GetView {
       body: [
         Text("숫자 필드").expanded(),
         ElevatedButton(
-            onPressed: () {
-              Utils.clc(clcList);
-            },
-            child: Text("Test")),
+          onPressed: () {
+            Utils.clc(clcList);
+          },
+          child: Text("Test"),
+        ),
         KeyboardComp(
           onPressed: (v) {
             if (v.value == "AC") {
               clcList.clear();
               return;
             }
+
             if (v.type == 0) {
               if (clcList.isEmpty) {
                 clcList.add(v);
