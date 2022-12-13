@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:real_life_calculator/comp/icon_data.dart';
 import 'package:real_life_calculator/model/isar_model.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:vibration/vibration.dart';
@@ -10,73 +11,90 @@ class KeyboardComp extends GetView {
     required this.onPressed,
   });
 
-  Map<String, Function()> clcButtons1 = {
-    "AC": () => NumberTypeIsar()
+  Map<Widget, Function()> clcButtons1 = {
+    Text("AC")
+        .fontSize(28)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => NumberTypeIsar()
       ..type = 1
       ..value = "AC",
-    "%": () => NumberTypeIsar()
+    IconsData.per(): () => NumberTypeIsar()
       ..type = 1
       ..value = "%",
-    "( )": () => NumberTypeIsar()
+    IconsData.parenthesis(): () => NumberTypeIsar()
       ..type = 1
       ..value = "()",
-    "÷": () => NumberTypeIsar()
+    IconsData.divide(): () => NumberTypeIsar()
       ..type = 1
       ..value = "÷",
   };
-  Map<String, Function()> clcButtons2 = {
-    "7": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "7",
-    "8": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "8",
-    "9": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "9",
-    "×": () => NumberTypeIsar()
+  Map<Widget, Function()> clcButtons2 = {
+    Text("7").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "7",
+    Text("8").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "8",
+    Text("9").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "9",
+    IconsData.cross(): () => NumberTypeIsar()
       ..type = 1
       ..value = "×",
   };
-  Map<String, Function()> clcButtons3 = {
-    "4": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "4",
-    "5": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "5",
-    "6": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "6",
-    "-": () => NumberTypeIsar()
+  Map<Widget, Function()> clcButtons3 = {
+    Text("4").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "4",
+    Text("5").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "5",
+    Text("6").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "6",
+    IconsData.minus(): () => NumberTypeIsar()
       ..type = 1
       ..value = "-",
   };
-  Map<String, Function()> clcButtons4 = {
-    "1": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "1",
-    "2": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "2",
-    "3": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "3",
-    "+": () => NumberTypeIsar()
+  Map<Widget, Function()> clcButtons4 = {
+    Text("1").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "1",
+    Text("2").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "2",
+    Text("3").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "3",
+    IconsData.plus(): () => NumberTypeIsar()
       ..type = 1
       ..value = "+",
   };
-  Map<String, Function()> clcButtons5 = {
-    "0": () => NumberTypeIsar()
-      ..type = 0
-      ..value = "0",
-    "00": () => NumberTypeIsar()
+  Map<Widget, Function()> clcButtons5 = {
+    Text("0").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = "0",
+    Text("00")
+        .fontSize(28)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => NumberTypeIsar()
       ..type = 0
       ..value = "00",
-    ".": () => NumberTypeIsar()
-      ..type = 0
-      ..value = ".",
-    "=": () => NumberTypeIsar()
+    Text(".").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 0
+          ..value = ".",
+    IconsData.eq(): () => NumberTypeIsar()
       ..type = 1
       ..value = "=",
   };
@@ -102,41 +120,47 @@ class KeyboardComp extends GetView {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    var buttonWidth = (Get.width / 5) + 5;
-    var buttonheight = (Get.height / 2) / 7;
-    return [
-      ...[clcButtons1, clcButtons2, clcButtons3, clcButtons4, clcButtons5]
-          .map((e) {
-        return [
-          ...e
-              .map((key, value) {
-                return MapEntry(
-                    key,
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: Size(buttonWidth, buttonheight),
-                        maximumSize: Size(buttonWidth, buttonheight),
-                        padding: EdgeInsets.zero,
-                        foregroundColor: Colors.white,
-                        side: BorderSide(width: 1, color: Colors.orange),
-                      ),
-                      onPressed: () {
-                        Vibration.vibrate(duration: 10, amplitude: 200);
-                        onPressed(value());
-                      },
-                      child: Text(key).fontSize(32).textColor(Colors.white),
-                    ).marginAll(5));
-              })
-              .values
-              .toList(),
-        ].toRow();
-      }).toList()
-    ]
-        .toColumn(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-        )
-        .padding(horizontal: 10, bottom: 10);
+    return LayoutBuilder(builder: ((context, constraint) {
+      var buttonWidth = (Get.width / 4) - (4 * 2.2);
+      var buttonheight = (Get.height / 2) / 7;
+
+      return [
+        ...[clcButtons1, clcButtons2, clcButtons3, clcButtons4, clcButtons5]
+            .map((e) {
+          return [
+            ...e
+                .map((key, value) {
+                  return MapEntry(
+                      key,
+                      OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          minimumSize: Size(buttonWidth, buttonheight),
+                          maximumSize: Size(buttonWidth, buttonheight),
+                          padding: EdgeInsets.zero,
+                          foregroundColor: Colors.white,
+                          side: BorderSide(width: 1, color: Colors.orange),
+                        ),
+                        onPressed: () {
+                          if (GetPlatform.isMobile) {
+                            Vibration.vibrate(duration: 10, amplitude: 200);
+                          }
+                          onPressed(value());
+                        },
+                        child: key,
+                        // Text(key).fontSize(32).textColor(Colors.white),
+                      ).marginAll(5));
+                })
+                .values
+                .toList(),
+          ].toRow();
+        }).toList()
+      ]
+          .toColumn(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+          )
+          .padding(horizontal: 10, bottom: 10);
+    }));
   }
 }
 // Text(key)
