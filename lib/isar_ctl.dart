@@ -1,9 +1,11 @@
+import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:real_life_calculator/model/isar_model.dart';
 
 class IsarCtl {
   static Isar? isar;
+  static RxString curTab = "계산기".obs;
 
   static init() async {
     var dir = await getApplicationSupportDirectory();

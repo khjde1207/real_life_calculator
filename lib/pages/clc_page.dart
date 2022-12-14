@@ -27,36 +27,41 @@ class ClcPage extends GetView {
           // .getRange(
           //     (clcList.length - 30).clamp(0, clcList.length), clcList.length);
           return LayoutBuilder(builder: (p0, p1) {
-            print(p1);
+            print(p1.maxHeight ~/ (43));
+
             return t
                 .map((e) {
                   return AutoSizeText(
                     e.value,
-                    maxFontSize: 32,
-                    minFontSize: 24,
+                    maxFontSize: 42,
+                    minFontSize: e.type == 0 ? 42 : 24,
                     textAlign: TextAlign.end,
+                    maxLines: p1.maxHeight ~/ (43 * 2),
                   )
-                      // .fontSize(e.type == 0 ? 32 : 24)
-                      // .textColor(Colors.white.withOpacity(0.8))
+                      // Text(e.value)
+                      //     .fontSize(e.type == 0 ? 32 : 24)
+                      //     .textColor(Colors.white.withOpacity(0.8))
+                      //     // .backgroundColor(Colors.white)
                       .marginSymmetric(horizontal: 2);
                 })
                 .toList()
                 .toWrap(
                   alignment: WrapAlignment.end,
                   runAlignment: WrapAlignment.end,
-                  crossAxisAlignment: WrapCrossAlignment.end,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   clipBehavior: Clip.hardEdge,
                 );
-            // .overflow(maxHeight: p1.maxHeight);
           });
         }).width(double.infinity).marginSymmetric(horizontal: 20).expanded(),
-        Divider(),
+        // Divider(),
+
         Obx(() {
           return [
             AutoSizeText(
               rtnValue.toString(),
+              maxLines: 1,
               maxFontSize: 42,
-              minFontSize: 24,
+              minFontSize: 42,
               textAlign: TextAlign.right,
             ).marginOnly(right: 10).expanded(),
             IconsData.eq(color: Colors.white),
@@ -65,43 +70,45 @@ class ClcPage extends GetView {
               .marginSymmetric(horizontal: 10);
         }),
         Divider(),
-        Obx(() {
-          return [
-            AutoSizeText(
-              clcList.isNotEmpty && clcList.last.type == 0
-                  ? clcList.last.value
-                  : "",
-              maxFontSize: 42,
-              minFontSize: 24,
-              textAlign: TextAlign.right,
-            ).marginSymmetric(horizontal: 10).expanded(),
-            IconButton(
-              onPressed: () {
-                if (clcList.isNotEmpty) {
-                  if (clcList.last.type == 0 && clcList.last.value.isNotEmpty) {
-                    clcList.last.value = clcList.last.value
-                        .substring(0, clcList.last.value.length - 1);
-                  }
-                  if (clcList.last.type == 0 && clcList.last.value.isEmpty) {
-                    clcList.removeLast();
-                    if (clcList.isNotEmpty) {
-                      clcList.removeLast();
-                    }
-                  } else {
-                    clcList.removeLast();
-                  }
-                  clcList.refresh();
-                  rtnValue(Utils.clc(clcList));
-                }
-              },
-              icon: Icon(
-                Icons.backspace,
-                size: 42,
-              ),
-            ),
-          ].toRow(mainAxisAlignment: MainAxisAlignment.end);
-        }),
-        Divider().marginOnly(bottom: 10),
+        // Obx(() {
+        //   return [
+        //     AutoSizeText(
+        //       clcList.isNotEmpty && clcList.last.type == 0
+        //           ? clcList.last.value
+        //           : "",
+        //       maxFontSize: 42,
+        //       minFontSize: 42,
+        //       textAlign: TextAlign.right,
+        //     ).marginSymmetric(horizontal: 10).expanded(),
+        //     IconButton(
+        //       onPressed: () {
+        //         if (clcList.isNotEmpty) {
+        //           if (clcList.last.type == 0 && clcList.last.value.isNotEmpty) {
+        //             clcList.last.value = clcList.last.value
+        //                 .substring(0, clcList.last.value.length - 1);
+        //             clcList.refresh();
+        //             return;
+        //           }
+        //           if (clcList.last.type == 0 && clcList.last.value.isEmpty) {
+        //             clcList.removeLast();
+        //             // if (clcList.isNotEmpty) {
+        //             //   clcList.removeLast();
+        //             // }
+        //           } else {
+        //             clcList.removeLast();
+        //           }
+        //           clcList.refresh();
+        //           rtnValue(Utils.clc(clcList));
+        //         }
+        //       },
+        //       icon: Icon(
+        //         Icons.backspace,
+        //         size: 42,
+        //       ),
+        //     ),
+        //   ].toRow(mainAxisAlignment: MainAxisAlignment.end);
+        // }),
+        // Divider().marginOnly(bottom: 10),
         // Text("숫자 필드"),
         // ElevatedButton(
         //   onPressed: () {

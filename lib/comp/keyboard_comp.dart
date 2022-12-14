@@ -10,8 +10,28 @@ class KeyboardComp extends GetView {
   KeyboardComp({
     required this.onPressed,
   });
-
   Map<Widget, Function()> clcButtons1 = {
+    Text("AC")
+        .fontSize(28)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => NumberTypeIsar()
+      ..type = 1
+      ..value = "AC",
+    IconsData.per(): () => NumberTypeIsar()
+      ..type = 1
+      ..value = "%",
+    IconsData.parenthesis(): () => NumberTypeIsar()
+      ..type = 1
+      ..value = "()",
+    Icon(
+      Icons.backspace_outlined,
+      color: Colors.orange,
+      size: 38,
+    ): () => NumberTypeIsar()
+      ..type = 1
+      ..value = "÷",
+  };
+  Map<Widget, Function()> clcButtons2 = {
     Text("AC")
         .fontSize(28)
         .fontWeight(FontWeight.bold)
@@ -28,7 +48,7 @@ class KeyboardComp extends GetView {
       ..type = 1
       ..value = "÷",
   };
-  Map<Widget, Function()> clcButtons2 = {
+  Map<Widget, Function()> clcButtons3 = {
     Text("7").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
@@ -45,7 +65,7 @@ class KeyboardComp extends GetView {
       ..type = 1
       ..value = "×",
   };
-  Map<Widget, Function()> clcButtons3 = {
+  Map<Widget, Function()> clcButtons4 = {
     Text("4").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
@@ -62,7 +82,7 @@ class KeyboardComp extends GetView {
       ..type = 1
       ..value = "-",
   };
-  Map<Widget, Function()> clcButtons4 = {
+  Map<Widget, Function()> clcButtons5 = {
     Text("1").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
@@ -79,7 +99,7 @@ class KeyboardComp extends GetView {
       ..type = 1
       ..value = "+",
   };
-  Map<Widget, Function()> clcButtons5 = {
+  Map<Widget, Function()> clcButtons6 = {
     Text("0").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
@@ -125,8 +145,14 @@ class KeyboardComp extends GetView {
       var buttonheight = (Get.height / 2) / 7;
 
       return [
-        ...[clcButtons1, clcButtons2, clcButtons3, clcButtons4, clcButtons5]
-            .map((e) {
+        ...[
+          clcButtons1,
+          clcButtons2,
+          clcButtons3,
+          clcButtons4,
+          clcButtons5,
+          clcButtons6,
+        ].map((e) {
           return [
             ...e
                 .map((key, value) {
