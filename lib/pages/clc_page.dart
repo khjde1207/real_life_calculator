@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dart_eval/dart_eval.dart';
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:math_expressions/math_expressions.dart';
+import 'package:math_parser/math_parser.dart';
 import 'package:real_life_calculator/comp/icon_data.dart';
 import 'package:real_life_calculator/comp/keyboard_comp.dart';
 import 'package:real_life_calculator/model/isar_model.dart';
@@ -118,6 +121,59 @@ class ClcPage extends GetView {
         // ),
         KeyboardComp(
           onPressed: (v) {
+            // print(v.value);
+
+            // var e = eval('Decimal.parse(2) + Decimal.parse(2)');
+            var ss = MathCustomFunctionsImplemented({MathFunctionT1()});
+            var s = MathNodeExpression.fromString("4+2");
+            var rtn = s.calc(MathVariableValues({}));
+            // print(s.);
+            var lastidx = rtn.toString().indexOf(".");
+            if (lastidx > 0) {
+              var ls = rtn.toString().substring(lastidx).indexOf("0");
+              if (ls > 0) {
+                // print();
+                ls -= 1;
+                print(rtn.toStringAsFixed(ls));
+                return;
+              }
+            }
+            print(rtn.toInt());
+
+            // Parser p = Parser();
+            // Expression exp = p.parse("2+2");
+            // ContextModel ctx = ContextModel();
+            // double eval = exp.evaluate(EvaluationType.REAL, ctx);
+
+            // print(eval);
+            // final source = '''
+            //     import 'package:decimal/decimal.dart';
+            //     String main() {
+
+            //       return Decimal.parse('1');
+            //     }
+            // ''';
+            // final compiler = Compiler();
+            // var e = eval(source,
+            //     function: "main",
+            //     compilerSettings: (compiler) {},
+            //     runtimeSettings: (runtime) {});
+            //; final program = compiler.compile({
+            //   'example': {'main.dart': source}
+            // });
+
+            // final runtime = Runtime.ofProgram(program)
+            //   ..registerBridgeFunc('package:decimal/decimal.dart', 'decimal',
+            //       (runtime, target, args) {
+            //     print(runtime);
+            //     print(target);
+            //     print(args);
+            //   });
+            // runtime.setup();
+            // var e = runtime.executeLib('package:example/main.dart', 'main');
+            // print(e);
+
+            return;
             if (v.value == "AC") {
               clcList.clear();
               rtnValue(Utils.clc(clcList));
@@ -159,4 +215,37 @@ class ClcPage extends GetView {
       ].toColumn(),
     );
   }
+}
+
+class MathFunctionT1 implements MathDefinitionFunctionFreeformImplemented {
+  @override
+  final name = '*';
+  @override
+  final minArgumentsCount = 1;
+  @override
+  final maxArgumentsCount = 1;
+
+  @override
+  num calc(
+    List<MathNode> args,
+    MathVariableValues values, {
+    required MathCustomFunctionsImplemented customFunctions,
+  }) {
+    print(args[0]);
+    return 2 * args[0].calc(values, customFunctions: customFunctions);
+  }
+
+  @override
+  bool hasSameName(String other) {
+    return other == name;
+  }
+
+  @override
+  bool isCompatible(MathDefinitionFunctionFreeform other) {
+    return hasSameName(other.name) &&
+        minArgumentsCount == other.minArgumentsCount &&
+        maxArgumentsCount == other.maxArgumentsCount;
+  }
+
+  const MathFunctionT1();
 }
