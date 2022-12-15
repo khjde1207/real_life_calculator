@@ -14,6 +14,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 class ClcPage extends GetView {
   RxList<NumberTypeIsar> clcList = RxList<NumberTypeIsar>();
+  String curNums = "";
   Rx<Decimal> rtnValue = Decimal.parse("0").obs;
   @override
   Widget build(BuildContext context) {
@@ -125,7 +126,7 @@ class ClcPage extends GetView {
 
             // var e = eval('Decimal.parse(2) + Decimal.parse(2)');
             var ss = MathCustomFunctionsImplemented({MathFunctionT1()});
-            var s = MathNodeExpression.fromString("4+2");
+            var s = MathNodeExpression.fromString("4+-2");
             var rtn = s.calc(MathVariableValues({}));
             // print(s.);
             var lastidx = rtn.toString().indexOf(".");

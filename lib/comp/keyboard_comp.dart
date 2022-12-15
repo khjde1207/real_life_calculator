@@ -11,21 +11,33 @@ class KeyboardComp extends GetView {
     required this.onPressed,
   });
   Map<Widget, Function()> clcButtons1 = {
-    Text("AC")
-        .fontSize(28)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => NumberTypeIsar()
+    Icon(
+      Icons.save_outlined,
+      size: 42,
+      color: Colors.white,
+    ): () => NumberTypeIsar()
       ..type = 1
-      ..value = "AC",
-    IconsData.per(): () => NumberTypeIsar()
+      ..value = "SAVE",
+    Icon(
+      Icons.folder_open,
+      size: 42,
+      color: Colors.white,
+    ): () => NumberTypeIsar()
       ..type = 1
-      ..value = "%",
-    IconsData.parenthesis(): () => NumberTypeIsar()
+      ..value = "SAVE",
+    Icon(
+      Icons.more_horiz,
+      color: Colors.white,
+      size: 38,
+    ): () => NumberTypeIsar()
       ..type = 1
-      ..value = "()",
+      ..value = "...",
+    // IconsData.parenthesis(): () => NumberTypeIsar()
+    //   ..type = 1
+    //   ..value = "()",
     Icon(
       Icons.backspace_outlined,
-      color: Colors.orange,
+      color: Colors.white,
       size: 38,
     ): () => NumberTypeIsar()
       ..type = 1
@@ -33,31 +45,33 @@ class KeyboardComp extends GetView {
   };
   Map<Widget, Function()> clcButtons2 = {
     Text("AC")
-        .fontSize(28)
+        .fontSize(38)
         .fontWeight(FontWeight.bold)
         .textColor(Colors.orange): () => NumberTypeIsar()
       ..type = 1
       ..value = "AC",
-    IconsData.per(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "%",
-    IconsData.parenthesis(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "()",
+    Text("(").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 1
+          ..value = "(",
+    Text(")").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
+        () => NumberTypeIsar()
+          ..type = 1
+          ..value = ")",
     IconsData.divide(): () => NumberTypeIsar()
       ..type = 1
       ..value = "÷",
   };
   Map<Widget, Function()> clcButtons3 = {
-    Text("7").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("7").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "7",
-    Text("8").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("8").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "8",
-    Text("9").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("9").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "9",
@@ -66,15 +80,15 @@ class KeyboardComp extends GetView {
       ..value = "×",
   };
   Map<Widget, Function()> clcButtons4 = {
-    Text("4").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("4").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "4",
-    Text("5").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("5").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "5",
-    Text("6").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("6").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "6",
@@ -83,15 +97,15 @@ class KeyboardComp extends GetView {
       ..value = "-",
   };
   Map<Widget, Function()> clcButtons5 = {
-    Text("1").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("1").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "1",
-    Text("2").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("2").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "2",
-    Text("3").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("3").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "3",
@@ -100,17 +114,17 @@ class KeyboardComp extends GetView {
       ..value = "+",
   };
   Map<Widget, Function()> clcButtons6 = {
-    Text("0").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text("0").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = "0",
     Text("00")
-        .fontSize(28)
+        .fontSize(42)
         .fontWeight(FontWeight.bold)
         .textColor(Colors.orange): () => NumberTypeIsar()
       ..type = 0
       ..value = "00",
-    Text(".").fontSize(28).fontWeight(FontWeight.bold).textColor(Colors.orange):
+    Text(".").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
         () => NumberTypeIsar()
           ..type = 0
           ..value = ".",
@@ -142,50 +156,57 @@ class KeyboardComp extends GetView {
     // TODO: implement build
     return LayoutBuilder(builder: ((context, constraint) {
       var buttonWidth = (Get.width / 4) - (4 * 2.2);
-      var buttonheight = (Get.height / 2) / 7;
-
+      var buttonheight = (Get.height / 2) / 6.5;
+      var buttons = [
+        clcButtons1,
+        clcButtons2,
+        clcButtons3,
+        clcButtons4,
+        clcButtons5,
+        clcButtons6,
+      ];
       return [
-        ...[
-          clcButtons1,
-          clcButtons2,
-          clcButtons3,
-          clcButtons4,
-          clcButtons5,
-          clcButtons6,
-        ].map((e) {
+        ...buttons.map((e) {
+          var idx = buttons.indexOf(e);
+          var c = idx == 0 ? Colors.white : Colors.orange;
           return [
-            ...e
-                .map((key, value) {
-                  return MapEntry(
-                      key,
-                      OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          minimumSize: Size(buttonWidth, buttonheight),
-                          maximumSize: Size(buttonWidth, buttonheight),
-                          padding: EdgeInsets.zero,
-                          foregroundColor: Colors.white,
-                          side: BorderSide(width: 1, color: Colors.orange),
-                        ),
-                        onPressed: () {
-                          if (GetPlatform.isMobile) {
-                            Vibration.vibrate(duration: 10, amplitude: 200);
-                          }
-                          onPressed(value());
-                        },
-                        child: key,
-                        // Text(key).fontSize(32).textColor(Colors.white),
-                      ).marginAll(5));
-                })
-                .values
-                .toList(),
-          ].toRow();
+            [
+              ...e
+                  .map((key, value) {
+                    return MapEntry(
+                        key,
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            minimumSize: Size(buttonWidth, buttonheight),
+                            maximumSize: Size(buttonWidth, buttonheight),
+                            padding: EdgeInsets.zero,
+                            foregroundColor: Colors.white,
+                            side: BorderSide(width: 1, color: c),
+                          ),
+                          onPressed: () {
+                            if (GetPlatform.isMobile) {
+                              try {
+                                Vibration.vibrate(duration: 10);
+                              } catch (e) {}
+                            }
+                            onPressed(value());
+                          },
+                          child: key,
+                          // Text(key).fontSize(32).textColor(Colors.white),
+                        ).marginSymmetric(horizontal: 3, vertical: 3));
+                  })
+                  .values
+                  .toList(),
+            ].toRow(),
+            if (idx == 0) SizedBox(height: 5),
+          ].toColumn();
         }).toList()
       ]
           .toColumn(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
           )
-          .padding(horizontal: 10, bottom: 10);
+          .padding(horizontal: 5, bottom: 10);
     }));
   }
 }
