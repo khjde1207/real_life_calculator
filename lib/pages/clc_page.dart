@@ -14,8 +14,17 @@ import 'package:styled_widget/styled_widget.dart';
 
 class ClcPage extends GetView {
   RxList<NumberTypeIsar> clcList = RxList<NumberTypeIsar>();
+  RxString inputStr = "".obs;
   String curNums = "";
-  Rx<Decimal> rtnValue = Decimal.parse("0").obs;
+  RxString rtnValue = "".obs;
+  // Rx<Decimal> rtnValue = Decimal.parse("0").obs;
+  clc() {
+    var rtn = Utils.clc(inputStr.toString());
+    if (rtn != null) {
+      rtnValue(rtn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -23,40 +32,48 @@ class ClcPage extends GetView {
     return Scaffold(
       body: [
         Obx(() {
-          if (clcList.isEmpty) {
-            return SizedBox();
-          }
-          // print("LLLLLLLLLLLLLLLL$clcList");
-          var t = clcList;
-          // .getRange(
-          //     (clcList.length - 30).clamp(0, clcList.length), clcList.length);
-          return LayoutBuilder(builder: (p0, p1) {
-            print(p1.maxHeight ~/ (43));
+          return AutoSizeText(
+            inputStr.toString(),
+            maxFontSize: 42,
+            style: TextStyle(fontSize: 42),
+            minFontSize: 14,
+          ).width(double.infinity).padding(all: 10);
+        }).expanded(),
+        // Obx(() {
+        //   if (clcList.isEmpty) {
+        //     return SizedBox();
+        //   }
+        //   // print("LLLLLLLLLLLLLLLL$clcList");
+        //   var t = clcList;
+        //   // .getRange(
+        //   //     (clcList.length - 30).clamp(0, clcList.length), clcList.length);
+        //   return LayoutBuilder(builder: (p0, p1) {
+        //     print(p1.maxHeight ~/ (43));
 
-            return t
-                .map((e) {
-                  return AutoSizeText(
-                    e.value,
-                    maxFontSize: 42,
-                    minFontSize: e.type == 0 ? 42 : 24,
-                    textAlign: TextAlign.end,
-                    maxLines: p1.maxHeight ~/ (43 * 2),
-                  )
-                      // Text(e.value)
-                      //     .fontSize(e.type == 0 ? 32 : 24)
-                      //     .textColor(Colors.white.withOpacity(0.8))
-                      //     // .backgroundColor(Colors.white)
-                      .marginSymmetric(horizontal: 2);
-                })
-                .toList()
-                .toWrap(
-                  alignment: WrapAlignment.end,
-                  runAlignment: WrapAlignment.end,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  clipBehavior: Clip.hardEdge,
-                );
-          });
-        }).width(double.infinity).marginSymmetric(horizontal: 20).expanded(),
+        //     return t
+        //         .map((e) {
+        //           return AutoSizeText(
+        //             e.value,
+        //             maxFontSize: 42,
+        //             minFontSize: e.type == 0 ? 42 : 24,
+        //             textAlign: TextAlign.end,
+        //             maxLines: p1.maxHeight ~/ (43 * 2),
+        //           )
+        //               // Text(e.value)
+        //               //     .fontSize(e.type == 0 ? 32 : 24)
+        //               //     .textColor(Colors.white.withOpacity(0.8))
+        //               //     // .backgroundColor(Colors.white)
+        //               .marginSymmetric(horizontal: 2);
+        //         })
+        //         .toList()
+        //         .toWrap(
+        //           alignment: WrapAlignment.end,
+        //           runAlignment: WrapAlignment.end,
+        //           crossAxisAlignment: WrapCrossAlignment.center,
+        //           clipBehavior: Clip.hardEdge,
+        //         );
+        //   });
+        // }).width(double.infinity).marginSymmetric(horizontal: 20).expanded(),
         // Divider(),
 
         Obx(() {
@@ -122,24 +139,52 @@ class ClcPage extends GetView {
         // ),
         KeyboardComp(
           onPressed: (v) {
+            var operator = ["×", "÷", "+", "-"];
+            var input = inputStr.toString();
+
+            var lastChar =
+                input.isEmpty ? "" : input.substring(input.length - 1);
+
+            if (v == "AC") {
+              inputStr("");
+              rtnValue("");
+              return;
+            }
+            if (v == "back") {
+              if (input.isNotEmpty) {
+                inputStr(inputStr.substring(0, input.length - 1));
+              }
+              clc();
+              return;
+            }
+            if (input.isNotEmpty &&
+                operator.contains(lastChar) &&
+                operator.contains(v)) {
+              inputStr(inputStr.substring(0, input.length - 1) + v);
+              clc();
+            } else {
+              inputStr(inputStr.toString() + v);
+              clc();
+            }
+
             // print(v.value);
 
             // var e = eval('Decimal.parse(2) + Decimal.parse(2)');
-            var ss = MathCustomFunctionsImplemented({MathFunctionT1()});
-            var s = MathNodeExpression.fromString("4+-2");
-            var rtn = s.calc(MathVariableValues({}));
-            // print(s.);
-            var lastidx = rtn.toString().indexOf(".");
-            if (lastidx > 0) {
-              var ls = rtn.toString().substring(lastidx).indexOf("0");
-              if (ls > 0) {
-                // print();
-                ls -= 1;
-                print(rtn.toStringAsFixed(ls));
-                return;
-              }
-            }
-            print(rtn.toInt());
+            // var ss = MathCustomFunctionsImplemented({MathFunctionT1()});
+            // var s = MathNodeExpression.fromString("4+-2");
+            // var rtn = s.calc(MathVariableValues({}));
+            // // print(s.);
+            // var lastidx = rtn.toString().indexOf(".");
+            // if (lastidx > 0) {
+            //   var ls = rtn.toString().substring(lastidx).indexOf("0");
+            //   if (ls > 0) {
+            //     // print();
+            //     ls -= 1;
+            //     print(rtn.toStringAsFixed(ls));
+            //     return;
+            //   }
+            // }
+            // print(rtn.toInt());
 
             // Parser p = Parser();
             // Expression exp = p.parse("2+2");
@@ -175,39 +220,39 @@ class ClcPage extends GetView {
             // print(e);
 
             return;
-            if (v.value == "AC") {
-              clcList.clear();
-              rtnValue(Utils.clc(clcList));
-              return;
-            }
+            // if (v.value == "AC") {
+            //   clcList.clear();
+            //   rtnValue(Utils.clc(clcList));
+            //   return;
+            // }
 
-            if (v.type == 0) {
-              if (clcList.isEmpty) {
-                clcList.add(v);
-              } else {
-                if (clcList.last.type == 0) {
-                  clcList.last.value += v.value;
-                } else {
-                  clcList.add(v);
-                }
-              }
-            }
-            if (clcList.isNotEmpty && clcList.last.type == 0 && v.type == 1) {
-              var bClc = [
-                "%",
-                "()",
-                "÷",
-                "×",
-                "-",
-                "+",
-              ].contains(v.value);
-              if (bClc) {
-                clcList.add(v);
-              }
-            }
-            // print(v);
-            clcList.refresh();
-            rtnValue(Utils.clc(clcList));
+            // if (v.type == 0) {
+            //   if (clcList.isEmpty) {
+            //     clcList.add(v);
+            //   } else {
+            //     if (clcList.last.type == 0) {
+            //       clcList.last.value += v.value;
+            //     } else {
+            //       clcList.add(v);
+            //     }
+            //   }
+            // }
+            // if (clcList.isNotEmpty && clcList.last.type == 0 && v.type == 1) {
+            //   var bClc = [
+            //     "%",
+            //     "()",
+            //     "÷",
+            //     "×",
+            //     "-",
+            //     "+",
+            //   ].contains(v.value);
+            //   if (bClc) {
+            //     clcList.add(v);
+            //   }
+            // }
+            // // print(v);
+            // clcList.refresh();
+            // rtnValue(Utils.clc(clcList));
             // clcList.forEach((e) {
             //   print(e.value);
             // });

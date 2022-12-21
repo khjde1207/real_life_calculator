@@ -10,123 +10,98 @@ class KeyboardComp extends GetView {
   KeyboardComp({
     required this.onPressed,
   });
-  Map<Widget, Function()> clcButtons1 = {
-    IconsData.plus_minus(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "+/-",
-    Icon(
+  Map<Widget, String Function()> clcButtons1 = {
+    IconsData.plus_minus(): () => "+/-",
+    const Icon(
       Icons.folder_open,
       size: 42,
-      color: Colors.white,
-    ): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "SAVE",
-    Icon(
+      color: Colors.orange,
+    ): () => "open",
+    const Icon(
       Icons.more_horiz,
-      color: Colors.white,
+      color: Colors.orange,
       size: 38,
-    ): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "...",
-    // IconsData.parenthesis(): () => NumberTypeIsar()
-    //   ..type = 1
-    //   ..value = "()",
-    Icon(
+    ): () => "...",
+    const Icon(
       Icons.backspace_outlined,
-      color: Colors.white,
+      color: Colors.orange,
       size: 38,
-    ): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "÷",
+    ): () => "back",
   };
-  Map<Widget, Function()> clcButtons2 = {
-    Text("AC")
+  Map<Widget, String Function()> clcButtons2 = {
+    const Text("AC")
         .fontSize(38)
         .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "AC",
-    Text("(").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 1
-          ..value = "(",
-    Text(")").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 1
-          ..value = ")",
-    IconsData.divide(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "÷",
-  };
-  Map<Widget, Function()> clcButtons3 = {
-    Text("7").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "7",
-    Text("8").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "8",
-    Text("9").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "9",
-    IconsData.cross(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "×",
-  };
-  Map<Widget, Function()> clcButtons4 = {
-    Text("4").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "4",
-    Text("5").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "5",
-    Text("6").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "6",
-    IconsData.minus(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "-",
-  };
-  Map<Widget, Function()> clcButtons5 = {
-    Text("1").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "1",
-    Text("2").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "2",
-    Text("3").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "3",
-    IconsData.plus(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "+",
-  };
-  Map<Widget, Function()> clcButtons6 = {
-    Text("0").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = "0",
-    Text("00")
+        .textColor(Colors.orange): () => "AC",
+    const Text("(")
         .fontSize(42)
         .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => NumberTypeIsar()
-      ..type = 0
-      ..value = "00",
-    Text(".").fontSize(42).fontWeight(FontWeight.bold).textColor(Colors.orange):
-        () => NumberTypeIsar()
-          ..type = 0
-          ..value = ".",
-    IconsData.eq(): () => NumberTypeIsar()
-      ..type = 1
-      ..value = "=",
+        .textColor(Colors.orange): () => "(",
+    const Text(")")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => ")",
+    IconsData.divide(): () => "÷",
+  };
+  Map<Widget, String Function()> clcButtons3 = {
+    const Text("7")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "7",
+    const Text("8")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "8",
+    const Text("9")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "9",
+    IconsData.cross(): () => "×",
+  };
+  Map<Widget, String Function()> clcButtons4 = {
+    const Text("4")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "4",
+    const Text("5")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "5",
+    const Text("6")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "6",
+    IconsData.minus(): () => "-",
+  };
+  Map<Widget, String Function()> clcButtons5 = {
+    const Text("1")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "1",
+    const Text("2")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "2",
+    const Text("3")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "3",
+    IconsData.plus(): () => "+",
+  };
+  Map<Widget, String Function()> clcButtons6 = {
+    const Text("0")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "0",
+    const Text("00")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => "00",
+    const Text(".")
+        .fontSize(42)
+        .fontWeight(FontWeight.bold)
+        .textColor(Colors.orange): () => ".",
+    IconsData.eq(): () => "=",
   };
 
   Map<String, Function> engineeringButton = {
@@ -145,7 +120,7 @@ class KeyboardComp extends GetView {
     "x-10^y": () {},
   };
 
-  Function(NumberTypeIsar) onPressed;
+  Function(String) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +139,7 @@ class KeyboardComp extends GetView {
       return [
         ...buttons.map((e) {
           var idx = buttons.indexOf(e);
-          var c = idx == 0 ? Colors.white : Colors.orange;
+          var c = Colors.orange;
           return [
             [
               ...e
@@ -176,7 +151,7 @@ class KeyboardComp extends GetView {
                             minimumSize: Size(buttonWidth, buttonheight),
                             maximumSize: Size(buttonWidth, buttonheight),
                             padding: EdgeInsets.zero,
-                            foregroundColor: Colors.white,
+                            foregroundColor: c,
                             side: BorderSide(width: 1, color: c),
                           ),
                           onPressed: () {
