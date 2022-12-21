@@ -11,13 +11,9 @@ class KeyboardComp extends GetView {
     required this.onPressed,
   });
   Map<Widget, Function()> clcButtons1 = {
-    Icon(
-      Icons.save_outlined,
-      size: 42,
-      color: Colors.white,
-    ): () => NumberTypeIsar()
+    IconsData.plus_minus(): () => NumberTypeIsar()
       ..type = 1
-      ..value = "SAVE",
+      ..value = "+/-",
     Icon(
       Icons.folder_open,
       size: 42,
@@ -197,7 +193,7 @@ class KeyboardComp extends GetView {
                   })
                   .values
                   .toList(),
-            ].toRow(),
+            ].toRow(mainAxisAlignment: MainAxisAlignment.center),
             if (idx == 0) SizedBox(height: 5),
           ].toColumn();
         }).toList()
