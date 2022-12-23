@@ -101,7 +101,10 @@ class KeyboardComp extends GetView {
         .fontSize(42)
         .fontWeight(FontWeight.bold)
         .textColor(Colors.orange): () => ".",
-    IconsData.eq(): () => "=",
+    const Icon(
+      Icons.save_outlined,
+      size: 42,
+    ): () => "save",
   };
 
   Map<String, Function> engineeringButton = {

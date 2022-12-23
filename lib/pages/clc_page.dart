@@ -17,6 +17,7 @@ class ClcPage extends GetView {
   RxString inputStr = "".obs;
   String curNums = "";
   RxString rtnValue = "".obs;
+  RxString saveDatas = "".obs;
   // Rx<Decimal> rtnValue = Decimal.parse("0").obs;
   clc() {
     var rtn = Utils.clc(inputStr.toString());
@@ -33,48 +34,24 @@ class ClcPage extends GetView {
       body: [
         Obx(() {
           return AutoSizeText(
+            saveDatas.toString(),
+            maxFontSize: 42,
+            style: TextStyle(fontSize: 42),
+            textAlign: TextAlign.end,
+            minFontSize: 14,
+            maxLines: 2,
+          ).width(double.infinity).padding(all: 10);
+        }).expanded(flex: 3),
+        Obx(() {
+          return AutoSizeText(
             inputStr.toString(),
             maxFontSize: 42,
             style: TextStyle(fontSize: 42),
             minFontSize: 14,
+            textAlign: TextAlign.end,
+            maxLines: 3,
           ).width(double.infinity).padding(all: 10);
-        }).expanded(),
-        // Obx(() {
-        //   if (clcList.isEmpty) {
-        //     return SizedBox();
-        //   }
-        //   // print("LLLLLLLLLLLLLLLL$clcList");
-        //   var t = clcList;
-        //   // .getRange(
-        //   //     (clcList.length - 30).clamp(0, clcList.length), clcList.length);
-        //   return LayoutBuilder(builder: (p0, p1) {
-        //     print(p1.maxHeight ~/ (43));
-
-        //     return t
-        //         .map((e) {
-        //           return AutoSizeText(
-        //             e.value,
-        //             maxFontSize: 42,
-        //             minFontSize: e.type == 0 ? 42 : 24,
-        //             textAlign: TextAlign.end,
-        //             maxLines: p1.maxHeight ~/ (43 * 2),
-        //           )
-        //               // Text(e.value)
-        //               //     .fontSize(e.type == 0 ? 32 : 24)
-        //               //     .textColor(Colors.white.withOpacity(0.8))
-        //               //     // .backgroundColor(Colors.white)
-        //               .marginSymmetric(horizontal: 2);
-        //         })
-        //         .toList()
-        //         .toWrap(
-        //           alignment: WrapAlignment.end,
-        //           runAlignment: WrapAlignment.end,
-        //           crossAxisAlignment: WrapCrossAlignment.center,
-        //           clipBehavior: Clip.hardEdge,
-        //         );
-        //   });
-        // }).width(double.infinity).marginSymmetric(horizontal: 20).expanded(),
-        // Divider(),
+        }).expanded(flex: 1),
 
         Obx(() {
           return [
@@ -144,7 +121,10 @@ class ClcPage extends GetView {
 
             var lastChar =
                 input.isEmpty ? "" : input.substring(input.length - 1);
-
+            if (v == "save") {
+              saveDatas(inputStr.toString());
+              return;
+            }
             if (v == "AC") {
               inputStr("");
               rtnValue("");
