@@ -17,7 +17,7 @@ class ClcPage extends GetView {
   RxString inputStr = "".obs;
   String curNums = "";
   RxString rtnValue = "".obs;
-  RxString saveDatas = "".obs;
+  RxList<String> saveDatas = RxList<String>();
   // Rx<Decimal> rtnValue = Decimal.parse("0").obs;
   clc() {
     var rtn = Utils.clc(inputStr.toString());
@@ -33,14 +33,21 @@ class ClcPage extends GetView {
     return Scaffold(
       body: [
         Obx(() {
-          return AutoSizeText(
-            saveDatas.toString(),
-            maxFontSize: 42,
-            style: TextStyle(fontSize: 42),
-            textAlign: TextAlign.end,
-            minFontSize: 14,
-            maxLines: 2,
-          ).width(double.infinity).padding(all: 10);
+          return saveDatas
+              .map((e) {
+                return AutoSizeText(
+                  e,
+                  maxFontSize: 32,
+                  style: TextStyle(
+                      fontSize: 32,
+                      color: Get.textTheme.bodyText1?.color?.withOpacity(0.8)),
+                  textAlign: TextAlign.end,
+                  minFontSize: 14,
+                  maxLines: 1,
+                ).width(double.infinity).padding(all: 10);
+              })
+              .toList()
+              .toColumn(mainAxisAlignment: MainAxisAlignment.end);
         }).expanded(flex: 3),
         Obx(() {
           return AutoSizeText(
@@ -122,7 +129,7 @@ class ClcPage extends GetView {
             var lastChar =
                 input.isEmpty ? "" : input.substring(input.length - 1);
             if (v == "save") {
-              saveDatas(inputStr.toString());
+              saveDatas.add(rtnValue.toString());
               return;
             }
             if (v == "AC") {
