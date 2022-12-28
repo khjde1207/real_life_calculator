@@ -9,136 +9,141 @@ import 'package:vibration/vibration.dart';
 class KeyboardComp extends GetView {
   KeyboardComp({
     required this.onPressed,
+    this.onlyNumber = false,
   });
-  Map<Widget, String Function()> clcButtons1 = {
-    IconsData.plus_minus(): () => "+/-",
-    const Icon(
-      Icons.folder_open,
-      size: 42,
-      color: Colors.orange,
-    ): () => "open",
-    const Icon(
-      Icons.more_horiz,
-      color: Colors.orange,
-      size: 38,
-    ): () => "...",
-    const Icon(
-      Icons.backspace_outlined,
-      color: Colors.orange,
-      size: 38,
-    ): () => "back",
-  };
-  Map<Widget, String Function()> clcButtons2 = {
-    const Text("AC")
-        .fontSize(38)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "AC",
-    const Text("(")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "(",
-    const Text(")")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => ")",
-    IconsData.divide(): () => "÷",
-  };
-  Map<Widget, String Function()> clcButtons3 = {
-    const Text("7")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "7",
-    const Text("8")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "8",
-    const Text("9")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "9",
-    IconsData.cross(): () => "×",
-  };
-  Map<Widget, String Function()> clcButtons4 = {
-    const Text("4")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "4",
-    const Text("5")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "5",
-    const Text("6")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "6",
-    IconsData.minus(): () => "-",
-  };
-  Map<Widget, String Function()> clcButtons5 = {
-    const Text("1")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "1",
-    const Text("2")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "2",
-    const Text("3")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "3",
-    IconsData.plus(): () => "+",
-  };
-  Map<Widget, String Function()> clcButtons6 = {
-    const Text("0")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "0",
-    const Text("00")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => "00",
-    const Text(".")
-        .fontSize(42)
-        .fontWeight(FontWeight.bold)
-        .textColor(Colors.orange): () => ".",
-    const Icon(
-      Icons.save_outlined,
-      size: 42,
-    ): () => "save",
-  };
 
-  Map<String, Function> engineeringButton = {
-    "Hyp": () {},
-    "sin": () {},
-    "cos": () {},
-    "tan": () {},
-    "log": () {},
-    "ln": () {},
-    "mod": () {},
-    "1/x": () {},
-    "x!": () {},
-    "x^2": () {},
-    "x^y": () {},
-    "x^3": () {},
-    "x-10^y": () {},
-  };
+  List<Map<Widget, String Function()>> getButtons() {
+    return [
+      if (!onlyNumber)
+        {
+          IconsData.plus_minus(): () => "+/-",
+          const Icon(
+            Icons.folder_open,
+            size: 42,
+            color: Colors.orange,
+          ): () => "open",
+          const Icon(
+            Icons.more_horiz,
+            color: Colors.orange,
+            size: 38,
+          ): () => "...",
+          const Icon(
+            Icons.backspace_outlined,
+            color: Colors.orange,
+            size: 38,
+          ): () => "back",
+        },
+      if (!onlyNumber)
+        {
+          const Text("AC")
+              .fontSize(38)
+              .fontWeight(FontWeight.bold)
+              .textColor(Colors.orange): () => "AC",
+          const Text("(")
+              .fontSize(42)
+              .fontWeight(FontWeight.bold)
+              .textColor(Colors.orange): () => "(",
+          const Text(")")
+              .fontSize(42)
+              .fontWeight(FontWeight.bold)
+              .textColor(Colors.orange): () => ")",
+          IconsData.divide(): () => "÷",
+        },
+      {
+        const Text("7")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "7",
+        const Text("8")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "8",
+        const Text("9")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "9",
+        if (!onlyNumber) IconsData.cross(): () => "×",
+      },
+      {
+        const Text("4")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "4",
+        const Text("5")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "5",
+        const Text("6")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "6",
+        if (!onlyNumber) IconsData.minus(): () => "-",
+      },
+      {
+        const Text("1")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "1",
+        const Text("2")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "2",
+        const Text("3")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "3",
+        if (!onlyNumber) IconsData.plus(): () => "+",
+      },
+      {
+        const Text("0")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "0",
+        const Text("00")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => "00",
+        const Text(".")
+            .fontSize(42)
+            .fontWeight(FontWeight.bold)
+            .textColor(Colors.orange): () => ".",
+        if (!onlyNumber)
+          const Icon(
+            Icons.save_outlined,
+            size: 42,
+          ): () => "save",
+      },
+    ];
+  }
+
+  // Map<String, Function> engineeringButton = {
+  //   "Hyp": () {},
+  //   "sin": () {},
+  //   "cos": () {},
+  //   "tan": () {},
+  //   "log": () {},
+  //   "ln": () {},
+  //   "mod": () {},
+  //   "1/x": () {},
+  //   "x!": () {},
+  //   "x^2": () {},
+  //   "x^y": () {},
+  //   "x^3": () {},
+  //   "x-10^y": () {},
+  // };
 
   Function(String) onPressed;
+  bool onlyNumber = false;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return LayoutBuilder(builder: ((context, constraint) {
-      var buttonWidth = (Get.width / 4) - (4 * 2.2);
+      var buttons = getButtons();
+      var cnt = onlyNumber ? 3 : 4;
+      var buttonWidth = (Get.width / cnt) - (cnt * 2.2);
       var buttonheight = (Get.height / 2) / 6.5;
-      var buttons = [
-        clcButtons1,
-        clcButtons2,
-        clcButtons3,
-        clcButtons4,
-        clcButtons5,
-        clcButtons6,
-      ];
+
       return [
         ...buttons.map((e) {
           var idx = buttons.indexOf(e);

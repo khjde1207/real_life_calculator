@@ -29,25 +29,32 @@ class ClcPage extends GetView {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
+    final ScrollController _controller = ScrollController();
     return Scaffold(
       body: [
         Obx(() {
-          return saveDatas
-              .map((e) {
-                return AutoSizeText(
-                  e,
-                  maxFontSize: 32,
-                  style: TextStyle(
-                      fontSize: 32,
-                      color: Get.textTheme.bodyText1?.color?.withOpacity(0.8)),
-                  textAlign: TextAlign.end,
-                  minFontSize: 14,
-                  maxLines: 1,
-                ).width(double.infinity).padding(all: 10);
-              })
-              .toList()
-              .toColumn(mainAxisAlignment: MainAxisAlignment.end);
+          return ListView(
+              controller: _controller,
+              children: saveDatas.map((e) {
+                return Row(children: [
+                  AutoSizeText(
+                    e,
+                    maxFontSize: 32,
+                    style: TextStyle(
+                        fontSize: 32,
+                        color:
+                            Get.textTheme.bodyText1?.color?.withOpacity(0.8)),
+                    textAlign: TextAlign.end,
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ).padding(all: 10).expanded(),
+                  IconButton(
+                      onPressed: () {
+                        saveDatas.remove(e);
+                      },
+                      icon: Icon(Icons.delete)),
+                ]).card().marginSymmetric(horizontal: 10);
+              }).toList());
         }).expanded(flex: 3),
         Obx(() {
           return AutoSizeText(
@@ -130,6 +137,10 @@ class ClcPage extends GetView {
                 input.isEmpty ? "" : input.substring(input.length - 1);
             if (v == "save") {
               saveDatas.add(rtnValue.toString());
+              inputStr(rtnValue.toString());
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                _controller.jumpTo(_controller.position.maxScrollExtent);
+              });
               return;
             }
             if (v == "AC") {
