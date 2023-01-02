@@ -99,14 +99,21 @@ class KeyboardComp extends GetView {
             .fontSize(42)
             .fontWeight(FontWeight.bold)
             .textColor(Colors.orange): () => "0",
-        const Text("00")
-            .fontSize(42)
-            .fontWeight(FontWeight.bold)
-            .textColor(Colors.orange): () => "00",
+        if (!onlyNumber)
+          const Text("00")
+              .fontSize(42)
+              .fontWeight(FontWeight.bold)
+              .textColor(Colors.orange): () => "00",
         const Text(".")
             .fontSize(42)
             .fontWeight(FontWeight.bold)
             .textColor(Colors.orange): () => ".",
+        if (onlyNumber)
+          const Icon(
+            Icons.backspace_outlined,
+            color: Colors.orange,
+            size: 38,
+          ): () => "back",
         if (!onlyNumber)
           const Icon(
             Icons.save_outlined,

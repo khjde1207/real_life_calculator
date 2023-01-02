@@ -16,3 +16,12 @@ class NumberTypeIsar {
   int type = 0;
   String value = "";
 }
+
+class MathExpr {
+  String mainCategory = "";
+  String math = "";
+  List<String> inputList = [];
+  List<String> inputHints = [];
+  String cmd = "";
+  String title = "";
+}

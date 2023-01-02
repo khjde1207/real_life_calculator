@@ -18,6 +18,25 @@ class Utils {
     }
   }
 
+  static String? clcMath(MathExpr math, Map<String, String> inputs) {
+    try {
+      Parser p = Parser();
+
+      Expression exp = p.parse(math.math);
+
+      ContextModel cm = ContextModel();
+      inputs.forEach((key, value) {
+        cm.bindVariable(Variable(key), Number(num.parse(value)));
+      });
+      double eval = exp.evaluate(EvaluationType.REAL, cm);
+
+      return eval.toString();
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
   // static Decimal clc(List<NumberTypeIsar> clcList) {
   //   final d = (String s) => Decimal.parse(s);
   //   Decimal rtnValue = d("0");
