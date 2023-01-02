@@ -88,10 +88,9 @@ class MathComp extends GetView {
   // RxInt curSelectIdx = (-1).obs;
   @override
   Widget build(BuildContext context) {
-    // var ctl = Get.find<MathCompCtl>();
     var cmd = mathdata.cmd.split("").asMap();
 
-    return [
+    var rtn = [
       Text(mathdata.title),
       SizedBox(
         height: 5,
@@ -100,6 +99,7 @@ class MathComp extends GetView {
       List.generate(cmd.length, (index) {
         var ch = cmd[index];
         if (mathdata.inputList.contains(ch)) {
+          var idx = mathdata.inputList.indexOf(ch!);
           return Obx(
             () {
               return EditTextBox(
@@ -120,20 +120,31 @@ class MathComp extends GetView {
         if (ctl.clcStr.value != null) {
           return Text(ctl.clcStr.toString());
         }
-        return Text("");
+        return Text("123");
       }).alignment(Alignment.bottomRight),
     ]
         .toColumn(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start)
-        .padding(all: 5)
-        .decorated(
-            border:
-                Border.all(color: bSelect ? Colors.white : Colors.transparent))
+        .padding(all: 10);
+
+    // if (bSelect) {
+    //   return rtn.card().gestures(onTap: () {
+    //     if (onSelect != null) {
+    //       onSelect!(this);
+    //     }
+    //   });
+    // }
+    return rtn
+        .card(
+          elevation: bSelect ? null : 0,
+        )
+        .opacity(bSelect ? 1 : 0.8)
         .gestures(onTap: () {
+      print("::::::::::::");
       if (onSelect != null) {
         onSelect!(this);
       }
-    }).padding(all: 5);
+    });
   }
 }

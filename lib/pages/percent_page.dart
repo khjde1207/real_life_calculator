@@ -25,12 +25,12 @@ class PercentPage extends GetView {
       ..math = "b*100/a"
       ..cmd = "a에서b는 몇프로?"
       ..title = "전체값에서 일부값은 몇프로",
-    // MathExpr()
-    //   ..inputList = ["a", "b"]
-    //   ..inputHints = ["a", "b"]
-    //   ..math = "(a-b)/b*100"
-    //   ..cmd = "a가y로 변경되면"
-    //   ..title = "어떤값이 다른값으로 변경 된 경우, 몇퍼센트 증가/감소",
+    MathExpr()
+      ..inputList = ["a", "b"]
+      ..inputHints = ["a", "b"]
+      ..math = "(a-b)/b*100"
+      ..cmd = "a가b로 변경되면"
+      ..title = "어떤값이 다른값으로 변경 된 경우, 몇퍼센트 증가/감소",
     // MathExpr()
     //   ..inputList = ["a", "b"]
     //   ..inputHints = ["a", "b"]

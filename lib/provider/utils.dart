@@ -11,7 +11,15 @@ class Utils {
       Expression exp = p.parse(clcdata);
       ContextModel cm = ContextModel();
       double eval = exp.evaluate(EvaluationType.REAL, cm);
-
+      var lastidx = eval.toString().indexOf(".");
+      if (lastidx > 0) {
+        var ls = eval.toString().substring(lastidx).indexOf("0");
+        if (ls > 0) {
+          // print();
+          ls -= 1;
+          return eval.toStringAsFixed(ls);
+        }
+      }
       return eval.toString();
     } catch (e) {
       return null;
@@ -30,9 +38,19 @@ class Utils {
       });
       double eval = exp.evaluate(EvaluationType.REAL, cm);
 
+      var lastidx = eval.toString().indexOf(".");
+
+      if (lastidx > 0) {
+        var ls = eval.toString().substring(lastidx).indexOf("0");
+        if (ls > 0) {
+          // print();
+          ls -= 1;
+
+          return eval.toStringAsFixed(ls);
+        }
+      }
       return eval.toString();
     } catch (e) {
-      print(e);
       return null;
     }
   }
