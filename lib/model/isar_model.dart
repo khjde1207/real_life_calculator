@@ -9,6 +9,17 @@ class SettingIsar {
   List<int> regPages = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 }
 
+class MathExpr {
+  String mainCategory = "";
+  String subCategory = "";
+  String math = "";
+  List<String> inputList = [];
+  List<String> inputHints = [];
+  String cmd = "";
+  String title = "";
+  String answer = "";
+}
+
 // @Collection()
 class NumberTypeIsar {
   // int id = Isar.autoIncrement;
@@ -17,11 +28,12 @@ class NumberTypeIsar {
   String value = "";
 }
 
-class MathExpr {
-  String mainCategory = "";
-  String math = "";
-  List<String> inputList = [];
-  List<String> inputHints = [];
-  String cmd = "";
-  String title = "";
+class ExchangeCode {
+  String countryCode = "";
+  String name = "";
+  String code = "";
+  String basePrice = "";
+  String fullcode = "";
+  List<String> fullname = [];
+  DateTime lastDate = DateTime.now();
 }

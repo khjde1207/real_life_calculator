@@ -14,41 +14,55 @@ class PercentPageCtl extends GetxController {
 class PercentPage extends GetView {
   List<MathExpr> tests = [
     MathExpr()
+      ..mainCategory = "percent"
+      ..subCategory = "percent1"
       ..inputList = ["a", "b"]
       ..inputHints = ["a", "b"]
       ..math = "a*b/100"
       ..cmd = "a의b%는 얼마?"
       ..title = "전체값의 몇프로는 는 얼마",
     MathExpr()
+      ..mainCategory = "percent"
+      ..subCategory = "percent2"
       ..inputList = ["a", "b"]
       ..inputHints = ["a", "b"]
       ..math = "b*100/a"
       ..cmd = "a에서b는 몇프로?"
-      ..title = "전체값에서 일부값은 몇프로",
+      ..title = "전체값에서 일부값은 몇프로"
+      ..answer = "%",
     MathExpr()
+      ..mainCategory = "percent"
+      ..subCategory = "percent3"
       ..inputList = ["a", "b"]
       ..inputHints = ["a", "b"]
-      ..math = "(a-b)/b*100"
-      ..cmd = "a가b로 변경되면"
-      ..title = "어떤값이 다른값으로 변경 된 경우, 몇퍼센트 증가/감소",
-    // MathExpr()
-    //   ..inputList = ["a", "b"]
-    //   ..inputHints = ["a", "b"]
-    //   ..math = "a+(a*b/100)"
-    //   ..cmd = "a가y값 으로 증가 하면"
-    //   ..title = "값이 몇프로 증가 하면 결과 값은?",
-    // MathExpr()
-    //   ..inputList = ["a", "b"]
-    //   ..inputHints = ["a", "b"]
-    //   ..math = "a+(a*b/100)"
-    //   ..cmd = "a가b값 으로 감소 하면"
-    //   ..title = "값이 몇프로 감소 하면 결과 값은?",
-    // MathExpr()
-    //   ..inputList = ["a", "b"]
-    //   ..inputHints = ["a", "b"]
-    //   ..math = "a+(a*b/100)"
-    //   ..cmd = "a%가b와 같으면?"
-    //   ..title = "A% 가 B 값과 같으면 ",
+      ..math = "(b-a)/a*100"
+      ..cmd = "a이(가)b로 변경되면"
+      ..title = "어떤값이 다른값으로 변경 된 경우, 몇퍼센트 증가/감소"
+      ..answer = "%",
+    MathExpr()
+      ..mainCategory = "percent"
+      ..subCategory = "percent4"
+      ..inputList = ["a", "b"]
+      ..inputHints = ["a", "b"]
+      ..math = "a+(a*b/100)"
+      ..cmd = "a이(가)b% 증가 하면"
+      ..title = "값이 몇프로 증가 하면 결과 값은?",
+    MathExpr()
+      ..mainCategory = "percent"
+      ..subCategory = "percent5"
+      ..inputList = ["a", "b"]
+      ..inputHints = ["a", "b"]
+      ..math = "a-(a*b/100)"
+      ..cmd = "a이(가)b% 감소 하면"
+      ..title = "값이 몇프로 감소 하면 결과 값은?",
+    MathExpr()
+      ..mainCategory = "percent"
+      ..subCategory = "percent6"
+      ..inputList = ["a", "b"]
+      ..inputHints = ["a", "b"]
+      ..math = "(b*100)/10"
+      ..cmd = "a%이(가)b와 같으면?"
+      ..title = "A% 가 B 값과 같으면 ",
   ];
 
   Rxn<MathExpr> curselect = Rxn<MathExpr>();
@@ -86,7 +100,7 @@ class PercentPage extends GetView {
             .toColumn(
               crossAxisAlignment: CrossAxisAlignment.start,
             )
-            .scrollable()
+            .scrollable(padding: const EdgeInsets.only(bottom: 50, top: 20))
             .constrained(width: double.infinity)
             .padding(all: 10)
             .expanded(),

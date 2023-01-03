@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:real_life_calculator/i18n.dart';
 import 'package:real_life_calculator/isar_ctl.dart';
 import 'package:real_life_calculator/pages/main_page.dart';
 
@@ -10,6 +11,8 @@ void main() async {
   await initializeDateFormatting();
   await IsarCtl.init();
   runApp(GetMaterialApp(
+    translations: Messages(),
+    locale: Get.deviceLocale,
     debugShowCheckedModeBanner: false,
     themeMode: ThemeMode.dark,
     theme: ThemeData.light(useMaterial3: true),

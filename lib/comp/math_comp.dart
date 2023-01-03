@@ -21,6 +21,9 @@ class MathCompCtl extends GetxController {
     mathdata.inputList.forEach((e) {
       datas.addAll({e: ""});
     });
+    if (mathdata.inputList.isNotEmpty) {
+      curSelectStr(mathdata.inputList.first);
+    }
   }
 }
 
@@ -88,7 +91,7 @@ class MathComp extends GetView {
   // RxInt curSelectIdx = (-1).obs;
   @override
   Widget build(BuildContext context) {
-    var cmd = mathdata.cmd.split("").asMap();
+    var cmd = mathdata.cmd.split("");
 
     var rtn = [
       Text(mathdata.title),
@@ -96,32 +99,39 @@ class MathComp extends GetView {
         height: 5,
       ),
       // Text(mathdata.cmd),
-      List.generate(cmd.length, (index) {
-        var ch = cmd[index];
-        if (mathdata.inputList.contains(ch)) {
-          var idx = mathdata.inputList.indexOf(ch!);
-          return Obx(
-            () {
-              return EditTextBox(
-                  value: ctl.datas[ch] ?? "",
-                  bSelect: ctl.curSelectStr.value == ch && bSelect,
-                  onSelect: () {
-                    if (!bSelect && onSelect != null) {
-                      onSelect!(this);
-                    }
-                    ctl.curSelectStr(ch);
-                  });
-            },
-          );
-        }
-        return Text(ch ?? "");
-      }).toList().toWrap(crossAxisAlignment: WrapCrossAlignment.center),
-      Obx(() {
-        if (ctl.clcStr.value != null) {
-          return Text(ctl.clcStr.toString());
-        }
-        return Text("123");
-      }).alignment(Alignment.bottomRight),
+      [
+        cmd
+            .map((ch) {
+              if (mathdata.inputList.contains(ch)) {
+                return Obx(
+                  () {
+                    return EditTextBox(
+                        value: ctl.datas[ch] ?? "",
+                        bSelect: ctl.curSelectStr.value == ch && bSelect,
+                        onSelect: () {
+                          if (!bSelect && onSelect != null) {
+                            onSelect!(this);
+                          }
+                          ctl.curSelectStr(ch);
+                        });
+                  },
+                );
+              }
+              return Text(ch);
+            })
+            .toList()
+            .toWrap(crossAxisAlignment: WrapCrossAlignment.center),
+        Obx(() {
+          if (ctl.clcStr.value != null) {
+            return Text("${ctl.clcStr.toString()}${mathdata.answer}")
+                .fontWeight(FontWeight.bold)
+                .fontSize(24);
+          }
+          return const Text("");
+        }),
+      ].toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
+      // List.generate(cmd.length, (index) {
+      // }).toList().toWrap(crossAxisAlignment: WrapCrossAlignment.center),
     ]
         .toColumn(
             mainAxisSize: MainAxisSize.min,
@@ -141,7 +151,6 @@ class MathComp extends GetView {
         )
         .opacity(bSelect ? 1 : 0.8)
         .gestures(onTap: () {
-      print("::::::::::::");
       if (onSelect != null) {
         onSelect!(this);
       }
