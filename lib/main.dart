@@ -5,6 +5,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:real_life_calculator/i18n.dart';
 import 'package:real_life_calculator/isar_ctl.dart';
 import 'package:real_life_calculator/pages/main_page.dart';
+import 'package:real_life_calculator/provider/net.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

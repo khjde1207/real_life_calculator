@@ -32,8 +32,11 @@ class ExchangeCode {
   String countryCode = "";
   String name = "";
   String code = "";
+  String toCountryCode = "";
+  String toName = "";
+  String toCode = "";
   String basePrice = "";
   String fullcode = "";
-  List<String> fullname = [];
+  String currencyUnit = "";
   DateTime lastDate = DateTime.now();
 }

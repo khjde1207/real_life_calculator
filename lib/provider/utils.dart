@@ -1,5 +1,6 @@
 import 'package:decimal/decimal.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:real_life_calculator/model/isar_model.dart';
 
@@ -56,6 +57,16 @@ class Utils {
     } catch (e) {
       return null;
     }
+  }
+
+  static numberFormat(double number) {
+    String cutomSymbol = "";
+    if (number.isNaN) {
+      number = 0;
+    }
+    NumberFormat format =
+        NumberFormat.currency(locale: "ko", symbol: cutomSymbol);
+    return format.format(number);
   }
 
   static List<ExchangeCode> getExchangeList() {

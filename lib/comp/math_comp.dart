@@ -34,6 +34,7 @@ class MathComp extends GetView {
     this.bSelect = false,
     this.curSelect,
     this.onSelect,
+    this.currency = "",
   }) : super(key: key) {
     ctl = Get.put(MathCompCtl(mathdata: mathdata), tag: key.toString());
     if (curSelect != null && curSelect!.key == this.key) {
@@ -43,6 +44,7 @@ class MathComp extends GetView {
   late MathCompCtl ctl;
   MathExpr mathdata;
   bool bSelect = false;
+  String currency = "";
   MathComp? curSelect;
   Function(MathComp)? onSelect;
 
@@ -61,7 +63,14 @@ class MathComp extends GetView {
         ctl.datas.refresh();
       }
     }
-    ctl.clcStr(Utils.clcMath(mathdata, ctl.datas));
+    var clcdata = Utils.clcMath(mathdata, ctl.datas);
+    if (currency.isNotEmpty) {
+      try {
+        clcdata = Utils.numberFormat(double.parse(clcdata ?? ""));
+        print("::::::::::::::::::::$clcdata");
+      } catch (e) {}
+    }
+    ctl.clcStr(clcdata);
 
     // print("::::: $clcStr");
   }
