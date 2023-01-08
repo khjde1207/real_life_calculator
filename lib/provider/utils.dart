@@ -59,13 +59,22 @@ class Utils {
     }
   }
 
-  static numberFormat(double number) {
-    String cutomSymbol = "";
+  static String numberFormat(double number,
+      {String symbol = "", String locale = "ko"}) {
     if (number.isNaN) {
       number = 0;
     }
-    NumberFormat format =
-        NumberFormat.currency(locale: "ko", symbol: cutomSymbol);
+    var split = number.toString().split('.');
+    int decimals = 0;
+    if (split.length > 1 && split.last != "0") {
+      decimals = split.last.length.clamp(0, 3);
+    }
+    print(Get.deviceLocale?.languageCode);
+    NumberFormat format = NumberFormat.currency(
+        locale: Get.deviceLocale?.languageCode,
+        symbol: "",
+        decimalDigits: decimals);
+
     return format.format(number);
   }
 

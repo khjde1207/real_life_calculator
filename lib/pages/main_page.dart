@@ -14,14 +14,14 @@ import 'package:styled_widget/styled_widget.dart';
 
 class MainPage extends GetView {
   Map<String, GetView> pages = {
-    "계산기": ClcPage(),
-    "백분율 계산기": PercentPage(),
-    "환율 계산기": ExchangeRatePage(),
-    "물타기 계산기": StockClcPage(),
-    "임금 계산기": WageClcPage(),
-    "단위 계산기": InterestClcPage(),
-    "시간 계산기": TimeClcPage(),
-    "나이 계산기": AgeClcPage()
+    "Calculator".tr: ClcPage(),
+    "percentage calculator".tr: PercentPage(),
+    "currency converter".tr: ExchangeRatePage(),
+    "stock water ride".tr: StockClcPage(),
+    "wage calculator".tr: WageClcPage(),
+    "unit calculator".tr: InterestClcPage(),
+    "time calculator".tr: TimeClcPage(),
+    "age calculator".tr: AgeClcPage()
   };
   @override
   Widget build(BuildContext context) {

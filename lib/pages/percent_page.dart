@@ -85,6 +85,10 @@ class PercentPage extends GetView {
     // }).toList();
     return Scaffold(
       body: [
+        Text(
+          "percentage calculator".tr,
+          style: Get.textTheme.headlineLarge,
+        ),
         [
           ...tests.map((e) {
             return Obx(

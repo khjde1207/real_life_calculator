@@ -32,6 +32,10 @@ class ClcPage extends GetView {
     final ScrollController _controller = ScrollController();
     return Scaffold(
       body: [
+        Text(
+          "Calculator".tr,
+          style: Get.textTheme.headlineLarge,
+        ),
         Obx(() {
           return ListView(
               controller: _controller,

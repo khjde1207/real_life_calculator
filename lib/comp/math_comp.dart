@@ -67,12 +67,10 @@ class MathComp extends GetView {
     if (currency.isNotEmpty) {
       try {
         clcdata = Utils.numberFormat(double.parse(clcdata ?? ""));
-        print("::::::::::::::::::::$clcdata");
       } catch (e) {}
     }
-    ctl.clcStr(clcdata);
 
-    // print("::::: $clcStr");
+    ctl.clcStr(clcdata);
   }
 
   Widget EditTextBox({
@@ -80,7 +78,9 @@ class MathComp extends GetView {
     bSelect = false,
     Function? onSelect,
   }) {
-    return Text(value)
+    return Text(currency.isEmpty
+            ? value
+            : Utils.numberFormat(double.tryParse(value) ?? 0))
         .textAlignment(TextAlign.center)
         .padding(all: 10)
         .constrained(minWidth: 50)
@@ -132,7 +132,7 @@ class MathComp extends GetView {
             .toWrap(crossAxisAlignment: WrapCrossAlignment.center),
         Obx(() {
           if (ctl.clcStr.value != null) {
-            return Text("${ctl.clcStr.toString()}${mathdata.answer}")
+            return Text("${ctl.clcStr.toString()} ${mathdata.answer}")
                 .fontWeight(FontWeight.bold)
                 .fontSize(24);
           }

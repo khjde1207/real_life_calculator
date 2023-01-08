@@ -26,7 +26,7 @@ class KeyboardComp extends GetView {
             Icons.more_horiz,
             color: Colors.orange,
             size: 38,
-          ): () => "...",
+          ): () => "",
           const Icon(
             Icons.backspace_outlined,
             color: Colors.orange,

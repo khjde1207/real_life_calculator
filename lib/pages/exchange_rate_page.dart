@@ -84,6 +84,10 @@ class ExchangeRatePage extends GetView {
     return Scaffold(
       body: [
         [
+          Text(
+            "currency converter".tr,
+            style: Get.textTheme.headlineLarge,
+          ),
           Obx(() {
             if (ctl.formAllExList.isEmpty ||
                 ctl.toAllExList.isEmpty ||
@@ -130,54 +134,56 @@ class ExchangeRatePage extends GetView {
             return ctl.exchangeMathList
                 .map((e) {
                   return MathComp(
-                    key: Key(e.title),
+                    key: Key(
+                        "${e.title}${ctl.currentExchangeCode.value.fullcode}"),
                     mathdata: e,
                     curSelect: curselectComp.value,
                     onSelect: curselectComp,
-                    // currency: e.,
+                    currency: ctl.currentExchangeCode.value.code,
+                    // currency: e,
                   );
                 })
                 .toList()
                 .toColumn();
           }),
-          SizedBox(height: 10),
-          Text("환율 계산기"),
-          ElevatedButton(
-              onPressed: () {
-                print(Get.deviceLocale?.countryCode ?? "US");
-                var list = Utils.getExchangeList();
-                print(list);
-              },
-              child: Text("test")),
-          ElevatedButton(
-              onPressed: () async {
-                ctl.exchangeMathList.clear();
-                await 1.delay();
-                ctl.exchangeMathList([
-                  MathExpr()
-                    ..mainCategory = "excahge"
-                    ..subCategory = "excahge1"
-                    ..inputList = ["a"]
-                    ..inputHints = ["a"]
-                    ..math = "a/${ctl.currentExchangeCode.value.basePrice}"
-                    ..cmd = "a${ctl.currentExchangeCode.value.code}"
-                    ..title =
-                        "${ctl.currentExchangeCode.value.name} -> ${ctl.currentExchangeCode.value.toName}"
-                    ..answer = "${ctl.currentExchangeCode.value.toCode}",
-                  MathExpr()
-                    ..mainCategory = "excahge"
-                    ..subCategory = "excahge1"
-                    ..inputList = ["a"]
-                    ..inputHints = ["a"]
-                    ..math = "${ctl.currentExchangeCode.value.basePrice}*a"
-                    ..cmd = "a${ctl.currentExchangeCode.value.toCode}"
-                    ..title =
-                        "${ctl.currentExchangeCode.value.toName} -> ${ctl.currentExchangeCode.value.name}"
-                    ..answer = "${ctl.currentExchangeCode.value.code}",
-                ]);
-              },
-              child: Text("test"))
-        ].toColumn().expanded(),
+          // SizedBox(height: 10),
+          // Text("환율 계산기"),
+          // ElevatedButton(
+          //     onPressed: () {
+          //       print(Get.deviceLocale?.countryCode ?? "US");
+          //       var list = Utils.getExchangeList();
+          //       print(list);
+          //     },
+          //     child: Text("test")),
+          // ElevatedButton(
+          //     onPressed: () async {
+          //       ctl.exchangeMathList.clear();
+          //       await 1.delay();
+          //       ctl.exchangeMathList([
+          //         MathExpr()
+          //           ..mainCategory = "excahge"
+          //           ..subCategory = "excahge1"
+          //           ..inputList = ["a"]
+          //           ..inputHints = ["a"]
+          //           ..math = "a/${ctl.currentExchangeCode.value.basePrice}"
+          //           ..cmd = "a${ctl.currentExchangeCode.value.code}"
+          //           ..title =
+          //               "${ctl.currentExchangeCode.value.name} -> ${ctl.currentExchangeCode.value.toName}"
+          //           ..answer = "${ctl.currentExchangeCode.value.toCode}",
+          //         MathExpr()
+          //           ..mainCategory = "excahge"
+          //           ..subCategory = "excahge1"
+          //           ..inputList = ["a"]
+          //           ..inputHints = ["a"]
+          //           ..math = "${ctl.currentExchangeCode.value.basePrice}*a"
+          //           ..cmd = "a${ctl.currentExchangeCode.value.toCode}"
+          //           ..title =
+          //               "${ctl.currentExchangeCode.value.toName} -> ${ctl.currentExchangeCode.value.name}"
+          //           ..answer = "${ctl.currentExchangeCode.value.code}",
+          //       ]);
+          //     },
+          //     child: Text("test"))
+        ].toColumn().paddingAll(10).expanded(),
         KeyboardComp(
           onlyNumber: true,
           onPressed: (v) {
