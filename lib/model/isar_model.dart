@@ -18,6 +18,7 @@ class MathExpr {
   String cmd = "";
   String title = "";
   String answer = "";
+  int type = 0;
 }
 
 // @Collection()
